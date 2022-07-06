@@ -1,0 +1,22 @@
+global count
+count = 0
+def quickSort(list, i, j):
+    if i >= j:
+        return list
+    pivot = list[i]
+    low = i
+    high = j
+    while i < j:
+        while i < j and list[j] >= pivot:
+            j -= 1
+        list[i] = list[j]
+        global count
+        count += 1
+        while i < j and list[i] <= pivot:
+            i += 1
+        list[j] = list[i]
+        count += 1
+    list[j] = pivot
+    quickSort(list, low, i-1)
+    quickSort(list, i+1, high)
+    return count
