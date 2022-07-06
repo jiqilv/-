@@ -21,7 +21,7 @@ while(i<12):
     i = i + 1
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']  # 显示中文
-x_axis_data = [10,20,40,100,500,1000,2000,5000,7500,10000,100000]
+x_axis_data = [10,20,40,100,500,1000,2000,5000,7500,10000,50000,100000]
 # plot中参数的含义分别是横轴值，纵轴值，线的形状，颜色，透明度,线的宽度和标签
 plt.plot(x_axis_data, y_axis_data, 'ro-', color='#4169E1', alpha=0.8, linewidth=1, label='单位：个')
 plt.legend(loc="upper right")
