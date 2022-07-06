@@ -1,0 +1,30 @@
+from pylab \
+    import *
+import random
+from bubble import bubbleSort
+
+list = []
+y_axis_data = []
+n = [10,20,40,100,500,1000,2000,5000,7500,10000] # 冒泡排序时间复杂度过高，100000个随机数排序时间过久，这里选择10000个随机数减短需要的时间
+i = 0
+while(i<9):
+    t = 0
+    while (t < n[i]):
+        t = t + 1
+        a = random.randint(0, 100000)  # 随机数的范围是0到1000000
+        if a not in list:
+            list.append(a)
+    res1 = bubbleSort(list)
+    list = []
+    y_axis_data.append(res1)
+    print(y_axis_data)
+    i = i + 1
+
+mpl.rcParams['font.sans-serif'] = ['SimHei']  # 显示中文
+x_axis_data = [10,20,40,100,500,1000,2000,5000,10000]
+# plot中参数的含义分别是横轴值，纵轴值，线的形状，颜色，透明度,线的宽度和标签
+plt.plot(x_axis_data, y_axis_data, 'ro-', color='#4169E1', alpha=0.8, linewidth=1, label='单位：千万')
+plt.legend(loc="upper right")
+plt.xlabel('随机数数量')
+plt.ylabel('冒泡排序比较次数')
+plt.show()
