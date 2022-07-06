@@ -1,0 +1,55 @@
+from pylab \
+    import *
+import random
+global count
+count = 0
+def merge(list_left, list_right):
+    global count
+    l, r = 0, 0
+    new_list = []
+    while l < len(list_left) and r < len(list_right):
+        if list_left[l] <= list_right[r]:
+            new_list.append(list_left[l])
+            l += 1
+            count += 1
+        else:
+            new_list.append(list_right[r])
+            r += 1
+            count += 1
+    new_list += list_left[l:]
+    new_list += list_right[r:]
+    return new_list
+
+def mergeSort(mylist):
+    global count
+    if len(mylist) <= 1:
+        return mylist
+    mid = len(mylist) // 2
+    list_left = mergeSort(mylist[:mid])
+    list_right = mergeSort(mylist[mid:])
+    return merge(list_left, list_right)
+list = []
+y_axis_data = []
+n = [10,20,40,100,500,1000,2000,5000,7500,10000,50000,100000] # 冒泡排序时间复杂度过高，100000个随机数排序时间过久，这里选择10000个随机数减短需要的时间
+i = 0
+while(i<12):
+    t = 0
+    while (t < n[i]):
+        t = t + 1
+        a = random.randint(0, 100000)  # 随机数的范围是0到1000000
+        if a not in list:
+            list.append(a)
+    mergeSort(list)
+    res = count
+    list = []
+    y_axis_data.append(res)
+    print(y_axis_data)
+    i = i + 1
+mpl.rcParams['font.sans-serif'] = ['SimHei']  # 显示中文
+x_axis_data = [10,20,40,100,500,1000,2000,5000,7500,10000,50000,100000]
+# plot中参数的含义分别是横轴值，纵轴值，线的形状，颜色，透明度,线的宽度和标签
+plt.plot(x_axis_data, y_axis_data, 'ro-', color='#4169E1', alpha=0.8, linewidth=1, label='单位：百万')
+plt.legend(loc="upper right")
+plt.xlabel('随机数数量')
+plt.ylabel('合并排序比较次数')
+plt.show()
